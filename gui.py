@@ -1,6 +1,11 @@
 import tkinter as tk
 import mysql.connector
 
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+
 # Create a function to handle inserting data into the selected MySQL table
 def insert_data(table_name):
     if table_name not in ("User", "Artist", "Album", "Song", "Review"):
@@ -13,10 +18,10 @@ def insert_data(table_name):
 
     # Connect to the MySQL database
     conn = mysql.connector.connect(
-        host="your_mysql_host",
-        user="your_mysql_username",
-        password="your_mysql_password",
-        database="your_database_name"
+        host=os.getenv('DATABASE_HOST'),
+        user=os.getenv('USER'),
+        password=os.getenv('PASSWORD'),
+        database="tunereviewsdb"
     )
 
     cursor = conn.cursor()
@@ -73,11 +78,11 @@ windows = {}
 
 # Define the tables and their respective fields
 tables = {
-    "User": ["user_id", "username", "bio"],
-    "Artist": ["artist_id", "name", "genre"],
-    "Album": ["album_id", "title", "release_date", "artist_id"],
-    "Song": ["song_id", "title", "duration", "album_id"],
-    "Review": ["review_id", "user_id", "album_id", "rating", "comment"]
+    "User": ["User_ID", "Name", "Bio"],
+    "Artist": ["Artist_ID", "Name", "Bio"],
+    "Album": ["Album_ID", "Name", "Num_Songs", "Date_Made", "Artist_ID"],
+    "Song": ["Song_ID", "Name", "Duration", "Date_Made", "Album_ID"],
+    "Review": ["Review_ID", "Review_Text", "Date", "Album_ID", "Song_ID", "User_ID"]
 }
 
 # Create entry fields for each table
