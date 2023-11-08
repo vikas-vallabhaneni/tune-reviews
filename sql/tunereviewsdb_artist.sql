@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `artist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `artist` (
-  `Artist_ID` int NOT NULL,
+  `Artist_ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) DEFAULT NULL,
   `Bio` varchar(450) DEFAULT NULL,
   PRIMARY KEY (`Artist_ID`)

@@ -23,13 +23,16 @@ DROP TABLE IF EXISTS `review`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `review` (
-  `Review_ID` int NOT NULL,
+  `Review_ID` int NOT NULL AUTO_INCREMENT,
   `Review_Text` varchar(450) DEFAULT NULL,
   `Date` datetime DEFAULT NULL,
   `Album_ID` int DEFAULT NULL,
   `Song_ID` int DEFAULT NULL,
   `User_ID` int DEFAULT NULL,
-  PRIMARY KEY (`Review_ID`)
+  PRIMARY KEY (`Review_ID`),
+  FOREIGN KEY (`Album_ID`) REFERENCES `album`(`Album_ID`),
+  FOREIGN KEY (`Song_ID`) REFERENCES `song`(`Song_ID`),
+  FOREIGN KEY (`User_ID`) REFERENCES `user`(`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

@@ -23,12 +23,13 @@ DROP TABLE IF EXISTS `album`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `album` (
-  `Album_ID` int NOT NULL,
+  `Album_ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) DEFAULT NULL,
   `Num_Songs` int DEFAULT NULL,
   `Date_Made` datetime DEFAULT NULL,
   `Artist_ID` int DEFAULT NULL,
-  PRIMARY KEY (`Album_ID`)
+  PRIMARY KEY (`Album_ID`),
+  FOREIGN KEY (`Artist_ID`) REFERENCES `artist`(`Artist_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
