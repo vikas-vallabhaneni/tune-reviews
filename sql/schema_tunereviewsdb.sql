@@ -26,6 +26,7 @@ CREATE TABLE `album` (
   `Num_Songs` int DEFAULT NULL,
   `Date_Made` datetime DEFAULT NULL,
   `Artist_ID` int DEFAULT NULL,
+  `Album_Image` mediumblob DEFAULT NULL,
   PRIMARY KEY (`Album_ID`),
   FOREIGN KEY (`Artist_ID`) REFERENCES `artist`(`Artist_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
@@ -63,6 +64,30 @@ CREATE TABLE `review` (
   FOREIGN KEY (`User_ID`) REFERENCES `user`(`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS deleteAlbumWithCascade;
+
+CREATE PROCEDURE deleteAlbumWithCascade(albumID INT)
+BEGIN
+	DELETE FROM review WHERE album_id = albumID;
+	DELETE FROM song WHERE album_id = albumID;
+	DELETE FROM album WHERE album_id = albumID;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS deleteSongWithCascade;
+
+CREATE PROCEDURE deleteSongWithCascade(songID INT)
+BEGIN
+	DELETE FROM review WHERE song_id = songID;
+	DELETE FROM song WHERE song_id = songID;
+END //
+
+DELIMITER ;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
